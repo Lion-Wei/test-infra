@@ -56,6 +56,8 @@ var (
 		"(kubernetes-anywhere only) Indicates whether to do the control plane upgrade with kubeadm method \"init\" or \"upgrade\"")
 	kubernetesAnywhereCNI = flag.String("kubernetes-anywhere-cni", "",
 		"(kubernetes-anywhere only) The name of the CNI plugin used for the cluster's SDN.")
+	kubernetesAnywhereProxymMode = flag.String("kubernetes-anywhere-proxy-mode", "",
+		"(kubernetes-anywhere only) Chose kube-proxy mode.")
 )
 
 const kubernetesAnywhereConfigTemplate = `
@@ -75,6 +77,7 @@ const kubernetesAnywhereConfigTemplate = `
 .phase2.docker_registry="gcr.io/google-containers"
 .phase2.kubernetes_version="{{.KubernetesVersion}}"
 .phase2.provider="{{.Phase2Provider}}"
+.phase2.proxy_mode="{{.KubeproxyMode}}"
 .phase2.kubelet_version="{{.KubeletVersion}}"
 .phase2.kubeadm.version="{{.KubeadmVersion}}"
 .phase2.kube_context_name="{{.KubeContext}}"
@@ -103,6 +106,7 @@ type kubernetesAnywhere struct {
 	Region            string
 	KubeContext       string
 	CNI               string
+	KubeproxyMode     string
 }
 
 func newKubernetesAnywhere(project, zone string) (deployer, error) {
@@ -156,6 +160,7 @@ func newKubernetesAnywhere(project, zone string) (deployer, error) {
 		UpgradeMethod:     *kubernetesAnywhereUpgradeMethod,
 		KubernetesVersion: *kubernetesAnywhereKubernetesVersion,
 		NumNodes:          *kubernetesAnywhereNumNodes,
+		KubeproxyMode:     *kubernetesAnywhereProxymMode,
 		Project:           project,
 		Cluster:           *kubernetesAnywhereCluster,
 		Zone:              zone,
