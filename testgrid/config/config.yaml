@@ -1479,6 +1479,10 @@ test_groups:
   num_columns_recent: 20
   alert_stale_results_hours: 24
   num_failures_to_alert: 10
+- name: pull-kubernetes-e2e-gce-ipvs
+  gcs_prefix: kubernetes-jenkins/pr-logs/directory/pull-kubernetes-e2e-gce-ipvs
+  days_of_results: 1
+  num_columns_recent: 20
 - name: pull-kubernetes-e2e-gce-device-plugin-gpu
   gcs_prefix: kubernetes-jenkins/pr-logs/directory/pull-kubernetes-e2e-gce-device-plugin-gpu
   days_of_results: 1
@@ -3786,6 +3790,10 @@ dashboards:
     base_options: 'width=10'
     alert_options:
       alert_mail_to_addresses: 'michelle.192837+alerts@gmail.com, lusensjtu+alerts@gmail.com, bentheelder+alerts@google.com'
+  - name: pull-kubernetes-e2e-gce-ipvs
+    test_group_name: pull-kubernetes-e2e-gce-ipvs
+    days_of_results: 1
+    num_columns_recent: 20
   - name: pull-kubernetes-e2e-gce-device-plugin-gpu
     test_group_name: pull-kubernetes-e2e-gce-device-plugin-gpu
     base_options: 'width=10'

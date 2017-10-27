@@ -1114,6 +1114,68 @@ presubmits:
         hostPath:
           path: /mnt/disks/ssd0
 
+  - name: pull-kubernetes-e2e-gce-ipvs
+    agent: kubernetes
+    skip_branches:
+    - release-1.6 # IPVS support wasn't available before 1.8
+    - release-1.7
+    always_run: true
+    skip_report: false
+    max_concurrency: 12
+    context: pull-kubernetes-e2e-gce-ipvs
+    rerun_command: "/test pull-kubernetes-e2e-gce-ipvs"
+    trigger: "(?m)^/test( all| pull-kubernetes-e2e-gce-ipvs),?(\\s+|$)"
+    spec:
+      containers:
+      - image: gcr.io/k8s-testimages/kubekins-e2e:v20171026-4fad18a0-master
+        args:
+        - --root=/go/src
+        - "--clean"
+        - "--git-cache=/root/.cache/git"
+        - "--job=$(JOB_NAME)"
+        - "--repo=k8s.io/$(REPO_NAME)=$(PULL_REFS)"
+        - "--repo=k8s.io/release"
+        - "--service-account=/etc/service-account/service-account.json"
+        - "--upload=gs://kubernetes-jenkins/pr-logs"
+        - "--timeout=90"
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /etc/service-account/service-account.json
+        - name: USER
+          value: prow
+        - name: JENKINS_GCE_SSH_PRIVATE_KEY_FILE
+          value: /etc/ssh-key-secret/ssh-private
+        - name: JENKINS_GCE_SSH_PUBLIC_KEY_FILE
+          value: /etc/ssh-key-secret/ssh-public
+        - name: TEST_TMPDIR
+          value: /root/.cache/bazel
+        # Bazel needs privileged mode in order to sandbox builds.
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /etc/service-account
+          name: service
+          readOnly: true
+        - mountPath: /etc/ssh-key-secret
+          name: ssh
+          readOnly: true
+        - name: cache-ssd
+          mountPath: /root/.cache
+        ports:
+        - containerPort: 9999
+          hostPort: 9999
+      volumes:
+      - name: service
+        secret:
+          secretName: service-account
+      - name: ssh
+        secret:
+          defaultMode: 256
+          secretName: ssh-key-secret
+      - name: cache-ssd
+        hostPath:
+          path: /mnt/disks/ssd0
+
   - name: pull-kubernetes-e2e-gke-device-plugin-gpu
     agent: kubernetes
     skip_branches:
@@ -2273,6 +2335,68 @@ presubmits:
     spec:
       containers:
       - image: gcr.io/k8s-testimages/kubekins-e2e:v20171027-35f67f55-master
+        args:
+        - --root=/go/src
+        - "--clean"
+        - "--git-cache=/root/.cache/git"
+        - "--job=$(JOB_NAME)"
+        - "--repo=k8s.io/$(REPO_NAME)=$(PULL_REFS)"
+        - "--repo=k8s.io/release"
+        - "--service-account=/etc/service-account/service-account.json"
+        - "--upload=gs://kubernetes-jenkins/pr-logs"
+        - "--timeout=90"
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /etc/service-account/service-account.json
+        - name: USER
+          value: prow
+        - name: JENKINS_GCE_SSH_PRIVATE_KEY_FILE
+          value: /etc/ssh-key-secret/ssh-private
+        - name: JENKINS_GCE_SSH_PUBLIC_KEY_FILE
+          value: /etc/ssh-key-secret/ssh-public
+        - name: TEST_TMPDIR
+          value: /root/.cache/bazel
+        # Bazel needs privileged mode in order to sandbox builds.
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /etc/service-account
+          name: service
+          readOnly: true
+        - mountPath: /etc/ssh-key-secret
+          name: ssh
+          readOnly: true
+        - name: cache-ssd
+          mountPath: /root/.cache
+        ports:
+        - containerPort: 9999
+          hostPort: 9999
+      volumes:
+      - name: service
+        secret:
+          secretName: service-account
+      - name: ssh
+        secret:
+          defaultMode: 256
+          secretName: ssh-key-secret
+      - name: cache-ssd
+        hostPath:
+          path: /mnt/disks/ssd0
+
+  - name: pull-security-kubernetes-e2e-gce-ipvs
+    agent: kubernetes
+    skip_branches:
+    - release-1.6 # IPVS support wasn't available before 1.8
+    - release-1.7
+    always_run: true
+    skip_report: false
+    max_concurrency: 12
+    context: pull-security-kubernetes-e2e-gce-ipvs
+    rerun_command: "/test pull-security-kubernetes-e2e-gce-ipvs"
+    trigger: "(?m)^/test( all| pull-security-kubernetes-e2e-gce-ipvs),?(\\s+|$)"
+    spec:
+      containers:
+      - image: gcr.io/k8s-testimages/kubekins-e2e:v20171026-4fad18a0-master
         args:
         - --root=/go/src
         - "--clean"
