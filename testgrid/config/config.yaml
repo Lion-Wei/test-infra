@@ -207,6 +207,8 @@ test_groups:
   gcs_prefix: kubernetes-jenkins/logs/ci-kubernetes-e2e-gci-gce-scalability
 - name: ci-kubernetes-e2e-gci-gce-ip-alias
   gcs_prefix: kubernetes-jenkins/logs/ci-kubernetes-e2e-gci-gce-ip-alias
+- name: ci-kubernetes-e2e-gci-gce-ipvs
+  gcs_prefix: kubernetes-jenkins/logs/ci-kubernetes-e2e-gci-gce-ipvs
 - name: ci-kubernetes-e2e-gce-alpha-api
   gcs_prefix: kubernetes-jenkins/logs/ci-kubernetes-e2e-gce-alpha-api
 - name: ci-kubernetes-e2e-gci-gce-serial
@@ -1479,10 +1481,6 @@ test_groups:
   num_columns_recent: 20
   alert_stale_results_hours: 24
   num_failures_to_alert: 10
-- name: pull-kubernetes-e2e-gce-ipvs
-  gcs_prefix: kubernetes-jenkins/pr-logs/directory/pull-kubernetes-e2e-gce-ipvs
-  days_of_results: 1
-  num_columns_recent: 20
 - name: pull-kubernetes-e2e-gce-device-plugin-gpu
   gcs_prefix: kubernetes-jenkins/pr-logs/directory/pull-kubernetes-e2e-gce-device-plugin-gpu
   days_of_results: 1
@@ -1856,6 +1854,8 @@ dashboards:
     test_group_name: ci-kubernetes-e2e-gci-gce-scalability-release-1-7
   - name: gci-gce-ip-alias
     test_group_name: ci-kubernetes-e2e-gci-gce-ip-alias
+  - name: gci-gce-ipvs
+    test_group_name: ci-kubernetes-e2e-gci-gce-ipvs
   - name: gce-alpha-api
     test_group_name: ci-kubernetes-e2e-gce-alpha-api
   - name: gci-gce-serial
@@ -3268,6 +3268,10 @@ dashboards:
     test_group_name: ci-kubernetes-e2e-gci-gce-ip-alias
     alert_options:
       alert_mail_to_addresses: 'kubernetes-sig-network-test-failures@googlegroups.com'
+  - name: gci-gce-ipvs
+    test_group_name: ci-kubernetes-e2e-gci-gce-ipvs
+    alert_options:
+      alert_mail_to_addresses: 'kubernetes-sig-network-test-failures@googlegroups.com'
   - name: gce-alpha-api
     test_group_name: ci-kubernetes-e2e-gce-alpha-api
     alert_options:
@@ -3790,10 +3794,6 @@ dashboards:
     base_options: 'width=10'
     alert_options:
       alert_mail_to_addresses: 'michelle.192837+alerts@gmail.com, lusensjtu+alerts@gmail.com, bentheelder+alerts@google.com'
-  - name: pull-kubernetes-e2e-gce-ipvs
-    test_group_name: pull-kubernetes-e2e-gce-ipvs
-    days_of_results: 1
-    num_columns_recent: 20
   - name: pull-kubernetes-e2e-gce-device-plugin-gpu
     test_group_name: pull-kubernetes-e2e-gce-device-plugin-gpu
     base_options: 'width=10'
