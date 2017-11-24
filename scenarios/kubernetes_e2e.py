@@ -662,9 +662,9 @@ def main(args):
         runner_args.append('--logexporter-gcs-path=%s' % os.environ.get('GCS_ARTIFACTS_DIR', ''))
 
     if args.kubeadm:
-        version = kubeadm_version(args.kubeadm, shared_build_gcs_path)
+        version = "gs://kubernetes-release-dev/bazel/v1.10.0-alpha.1.305+a6510faf1d0ebb/bin/linux/amd64/"#"v1.10.0-alpha.0.610+0b597b51d6de4c"
         runner_args.extend([
-            '--kubernetes-anywhere-path=%s' % os.path.join(workspace, 'kubernetes-anywhere'),
+            '--kubernetes-anywhere-path=%s' % os.path.join('/workspace/', 'kubernetes-anywhere'),
             '--kubernetes-anywhere-phase2-provider=kubeadm',
             '--kubernetes-anywhere-cluster=%s' % cluster,
             '--kubernetes-anywhere-kubeadm-version=%s' % version,
