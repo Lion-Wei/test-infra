@@ -8358,6 +8358,7 @@
       "--deployment=kubernetes-anywhere",
       "--env-file=jobs/platform/gce.env",
       "--extract=ci/latest",
+      "--gcp-project=k8s-e2e-lw",
       "--gcp-zone=us-central1-f",
       "--kubeadm=ci",
       "--kubernetes-anywhere-dump-cluster-logs=true",
@@ -8365,7 +8366,7 @@
       "--kubernetes-anywhere-kubernetes-version=ci/latest",
       "--kubernetes-anywhere-proxy-mode=ipvs",
       "--provider=kubernetes-anywhere",
-      "--test_args=--ginkgo.focus=\\[Conformance\\]|\\[Feature:BootstrapTokens\\]|\\[Feature:NodeAuthorizer\\] --minStartupPods=8",
+      "--test_args=--ginkgo.focus=\\[sig-network\\] --ginkgo.skip=\\[Slow\\]|\\[Serial\\]|\\[Disruptive\\]|\\[Flaky\\]|\\[Feature:.+\\] --minStartupPods=8",
       "--timeout=300m"
     ],
     "scenario": "kubernetes_e2e",
