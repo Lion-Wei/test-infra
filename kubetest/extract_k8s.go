@@ -128,6 +128,9 @@ func (l extractStrategies) Extract(project, zone string, extractSrc bool) error 
 		if !strings.HasPrefix(name, "kubernetes") {
 			continue
 		}
+		if name == "kubernetes-anywhere" {
+			continue
+		}
 		log.Printf("rm %s", name)
 		if err = os.RemoveAll(name); err != nil {
 			return err
