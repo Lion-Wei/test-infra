@@ -8361,6 +8361,7 @@
       "--gcp-project=k8s-e2e-lw",
       "--gcp-zone=us-central1-f",
       "--kubeadm=ci",
+      "--kubernetes-anywhere-cni=flannel",
       "--kubernetes-anywhere-dump-cluster-logs=true",
       "--kubernetes-anywhere-kubelet-ci-version=latest",
       "--kubernetes-anywhere-kubernetes-version=ci/latest",
