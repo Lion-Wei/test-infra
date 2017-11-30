@@ -49,8 +49,8 @@ var (
 		"(kubernetes-anywhere only) If specified, the ci version for the kubelt to use. Overrides kubernetes-anywhere-kubelet-version.")
 	kubernetesAnywhereCluster = flag.String("kubernetes-anywhere-cluster", "",
 		"(kubernetes-anywhere only) Cluster name. Must be set for kubernetes-anywhere.")
- 	kubernetesAnywhereProxymMode = flag.String("kubernetes-anywhere-proxy-mode", "",
- 		"(kubernetes-anywhere only) Chose kube-proxy mode.")
+	kubernetesAnywhereProxymMode = flag.String("kubernetes-anywhere-proxy-mode", "",
+		"(kubernetes-anywhere only) Chose kube-proxy mode.")
 	kubernetesAnywhereUpTimeout = flag.Duration("kubernetes-anywhere-up-timeout", 20*time.Minute,
 		"(kubernetes-anywhere only) Time limit between starting a cluster and making a successful call to the Kubernetes API.")
 	kubernetesAnywhereNumNodes = flag.Int("kubernetes-anywhere-num-nodes", 4,
